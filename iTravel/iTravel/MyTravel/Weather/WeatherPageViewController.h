@@ -15,25 +15,22 @@
 #import "ASIHTTPRequest.h"
 #import "ASIDownloadCache.h"
 #import "ResourceLoader.h"
+#import "StyledBackgroundView.h"
 
-@interface WeatherPageViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,MBProgressHUDDelegate, ASIHTTPRequestDelegate> {
+@interface WeatherPageViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,MBProgressHUDDelegate, ASIHTTPRequestDelegate, UIWebViewDelegate> {
     NSString *city;
     NSDictionary *data;
     MBProgressHUD *HUD;
+    UIImageView *iconView;
 }
 
-- (void) loadDataTask;
-- (void) loadData;
-- (void) loadDataFailed: (ASIHTTPRequest *)request;
-- (void) didFinishLoadData: (ASIHTTPRequest *)request;
 - (WeatherPageViewController *) initWithCity: (NSString *)_city;
-- (void)requestFinished:(ASIHTTPRequest *)request;
-- (void)requestFailed:(ASIHTTPRequest *)request;
+- (void) fetchData;
 
 @property (nonatomic,retain) UITableView *tableView;
 @property (nonatomic,retain) NSString *city;
 @property (nonatomic,retain) NSDictionary *data;
-@property(nonatomic, retain) UIView *opaqueview;
-@property(nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic,retain) UIImageView *iconView;
+@property(nonatomic) BOOL needRefresh;
 
 @end

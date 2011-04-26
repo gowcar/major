@@ -26,6 +26,7 @@
 		3F3E77F9135B18510037C9A6 /* MyTravelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2536D5135AE09900DAB8AC /* MyTravelView.xib */; };
 		3F861AD2135C868400DC5F0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F861AD0135C868400DC5F0E /* Localizable.strings */; };
 		3F861ADB135C877900DC5F0E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3106D0135AC04400DCFF14 /* MainWindow.xib */; };
+		85506657136746E5004249B3 /* StyledBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85506656136746E5004249B3 /* StyledBackgroundView.m */; };
 		85A4AAAB135F49CD0038AB4E /* NSObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A4AA9A135F49CD0038AB4E /* NSObject+JSON.m */; };
 		85A4AAAC135F49CD0038AB4E /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A4AA9C135F49CD0038AB4E /* SBJsonParser.m */; };
 		85A4AAAD135F49CD0038AB4E /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A4AA9E135F49CD0038AB4E /* SBJsonStreamParser.m */; };
@@ -101,6 +102,8 @@
 		3F3E781D135B1B4E0037C9A6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainWindow.xib"; sourceTree = "<group>"; };
 		3F3E781F135B1B4E0037C9A6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3F861AD1135C868400DC5F0E /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		85506655136746E5004249B3 /* StyledBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyledBackgroundView.h; sourceTree = "<group>"; };
+		85506656136746E5004249B3 /* StyledBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyledBackgroundView.m; sourceTree = "<group>"; };
 		85A4AA98135F49CD0038AB4E /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		85A4AA99135F49CD0038AB4E /* NSObject+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSON.h"; sourceTree = "<group>"; };
 		85A4AA9A135F49CD0038AB4E /* NSObject+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSON.m"; sourceTree = "<group>"; };
@@ -334,6 +337,8 @@
 		85A4AABA135F4B2C0038AB4E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				85506655136746E5004249B3 /* StyledBackgroundView.h */,
+				85506656136746E5004249B3 /* StyledBackgroundView.m */,
 				85A4AABB135F4B2C0038AB4E /* JSONProvider.h */,
 				85A4AABC135F4B2C0038AB4E /* JSONProvider.m */,
 				85A4AB2B135F5B900038AB4E /* ResourceLoader.h */,
@@ -612,6 +617,7 @@
 				85A4AB1C135F4FDD0038AB4E /* Reachability.m in Sources */,
 				85A4AB2A135F5A640038AB4E /* MBProgressHUD.m in Sources */,
 				85A4AB2D135F5B900038AB4E /* ResourceLoader.m in Sources */,
+				85506657136746E5004249B3 /* StyledBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,4 +13,7 @@
     
 }
 
++ (NSURL *) resourceURLFromFile: (NSString *) _filepath;
++ (UIImage *) loadImage: (NSString *) _path;
+
 @end

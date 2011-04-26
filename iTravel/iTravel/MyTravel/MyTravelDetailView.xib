@@ -12,12 +12,12 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIView</string>
-			<string>IBUITabBarController</string>
-			<string>IBProxyObject</string>
 			<string>IBUITabBar</string>
-			<string>IBUITabBarItem</string>
+			<string>IBUITabBarController</string>
 			<string>IBUIViewController</string>
+			<string>IBUIView</string>
+			<string>IBUITabBarItem</string>
+			<string>IBProxyObject</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>

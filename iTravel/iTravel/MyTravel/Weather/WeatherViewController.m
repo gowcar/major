@@ -10,13 +10,12 @@
 
 
 @implementation WeatherViewController
-@synthesize scrollView;
+@synthesize scrollView, viewControllers, currentPageNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // 很好很好
     }
     return self;
 }
@@ -29,10 +28,7 @@
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -42,6 +38,9 @@
 //    scrollView.layer.cornerRadius = 8;
 //    scrollView.layer.masksToBounds = YES;
 
+    self.view.backgroundColor = [UIColor blackColor];
+    scrollView.backgroundColor = [UIColor clearColor];
+    
     NSInteger kNumberOfPages = 2;
     scrollView.pagingEnabled = YES;
     scrollView.contentSize = CGSizeMake((scrollView.frame.size.width) * kNumberOfPages, scrollView.frame.size.height);
@@ -52,25 +51,59 @@
     scrollView.canCancelContentTouches = YES;
     
     WeatherPageViewController *localPage = [[WeatherPageViewController alloc] initWithCity:@"101010100"];
-//    WeatherPageViewController *destPage = [[WeatherPageViewController alloc] initWithCity:@"101020100"];
+    WeatherPageViewController *destPage = [[WeatherPageViewController alloc] initWithCity:@"101020100"];
 
     CGRect frame1 = scrollView.frame;
     frame1.origin.x = frame1.size.width * 0;
     frame1.origin.y = 0;
+    localPage.needRefresh = YES;
     localPage.view.frame = frame1;
+    [localPage fetchData];
     [scrollView addSubview:localPage.view];
 
     
-//    CGRect frame2 = scrollView.frame;
-//    frame2.origin.x = frame2.size.width * 1;
-//    frame2.origin.y = 0;
-//    destPage.view.frame = frame2;
-//    
-//    [scrollView addSubview:destPage.view];
+    CGRect frame2 = scrollView.frame;
+    frame2.origin.x = frame2.size.width * 1;
+    frame2.origin.y = 0;
+    destPage.view.frame = frame2;
+    
+    [scrollView addSubview:destPage.view];
+    
+    viewControllers = [[NSArray alloc] initWithObjects:localPage, destPage, nil];
 
+
+    if (self.parentViewController) {
+        UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"刷新"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(reload:)];
+        self.parentViewController.navigationItem.rightBarButtonItem = reloadButton;
+        [reloadButton release];
+    }
     [super viewDidLoad];
 }
 
+- (NSInteger) currentPageNumber {
+    CGFloat pageWidth = scrollView.frame.size.width;
+    NSInteger page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    return page;
+}
+
+- (void) reload: (id)sender{
+    WeatherPageViewController *controller = [viewControllers objectAtIndex:[self currentPageNumber]];
+    controller.needRefresh = YES;
+    [controller fetchData];
+    controller.needRefresh = NO;
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    WeatherPageViewController *controller = [viewControllers objectAtIndex:[self currentPageNumber]];
+    if (!controller.needRefresh) {
+        controller.needRefresh = YES;
+        [controller fetchData];
+    }
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
@@ -80,9 +113,9 @@
 
 - (void)viewDidUnload
 {
+    [viewControllers release];
+    [scrollView release];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -11,15 +11,12 @@
 
 @implementation WeatherPageViewController
 
-@synthesize city;
-@synthesize data;
-@synthesize tableView, opaqueview, activityIndicator;
+@synthesize tableView, iconView, city, data, needRefresh;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -40,107 +37,92 @@
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-//    opaqueview = [[UIView alloc] initWithFrame: CGRectMake(0, 0,180 ,100)];
-//    activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(0, 0, 40, 40)];
-//    
-//    opaqueview.layer.cornerRadius = 8.0f;
-//    opaqueview.layer.masksToBounds = YES;
-//   
-//    opaqueview.center = CGPointMake(self.view.frame.size.width/2, (self.view.frame.size.height/2) - 20);
-//    activityIndicator.center = CGPointMake(opaqueview.frame.size.width/2, opaqueview.frame.size.height/2 - 10);
-//    
-//    //activityIndicator.center = opaqueview.center;
-//    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-//    
-//    opaqueview.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6f];
-//    //opaqueview.alpha = 0.6;
-//    opaqueview.hidden = NO;
-//    
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, opaqueview.frame.size.height - 30, opaqueview.frame.size.width, 20)];
-//    label.textAlignment = UITextAlignmentCenter;
-//    label.opaque = NO;
-//    label.textColor = [UIColor whiteColor];
-//    label.font = [UIFont boldSystemFontOfSize:18];
-//    label.backgroundColor = [UIColor clearColor];
-//    label.text = @"Loading";
-//    [opaqueview addSubview: label];
-//
-//    [opaqueview addSubview: activityIndicator];
-//    
-//    
-//    [activityIndicator startAnimating]; 
-//    [self.view addSubview:opaqueview];
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    NSLog(@"Rows :%d", tableView.delegate == self );
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 
-//    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    self.view.backgroundColor = [UIColor blackColor];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView.backgroundColor = [UIColor clearColor];
+
+    CGRect webRect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    UIWebView *webView  = [[UIWebView alloc] initWithFrame: webRect];
+    
+    webView.userInteractionEnabled = NO;
+    webView.delegate = self;
+    webView.opaque = NO;
+    webView.backgroundColor = [UIColor blackColor];
+
+    [webView loadRequest:[NSURLRequest requestWithURL:[ResourceLoader resourceURLFromFile:@"Animations/rain.html"]]];
+    [self.view insertSubview:webView atIndex:0];
+    [self.view.window sendSubviewToBack:webView];
+
+    CGRect rect = CGRectMake(self.view.frame.size.width - 160, -20, 180, 180);
+    self.iconView = [[UIImageView alloc] initWithFrame:rect];
+    [self.view addSubview:self.iconView];
+
+    [super viewDidLoad];
+}
+
+- (void )webViewDidFinishLoad:(UIWebView *)webView {
+}
+
+- (void )webViewDidStartLoad:(UIWebView *)webView {     
+}
+
+
+
+- (void) fetchData {
+
+    if (!needRefresh) 
+        return;
+
     HUD = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
     [self.view addSubview:HUD];
     HUD.delegate = self;
-
     HUD.labelText = @"Loading";
-//    [HUD show:YES];
-//    [self loadData];
-    [HUD showWhileExecuting:@selector(loadDataTask) onTarget:self withObject:nil animated:YES];
-//    [self loadDataTask];
-
-    
-    //self.data = [[JSONProvider provideWeatherData:self.city] objectForKey:@"weatherinfo"];
-    //NSLog(@"Data is %@", data);
-    self.view.backgroundColor = [UIColor clearColor];
-    tableView.backgroundColor = [UIColor clearColor];
-    // Do any additional setup after loading the view from its nib.
-//    [tableView reloadData];
-    [super viewDidLoad];
+    [HUD showWhileExecuting:@selector(loadDataSynchronous) onTarget:self withObject:nil animated:YES];
 }
-- (void) loadDataTask {
-    self.data = [[JSONProvider provideWeatherData:self.city] objectForKey:@"weatherinfo"];
+
+- (void) loadDataSynchronous {
+
+    // 设置上方状态栏网络图标为活动
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: YES];
+    NSString *urlStr = [[[NSString alloc] initWithFormat:@"http://m.weather.com.cn/data/%@.html", city] autorelease];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *response = [request responseString];
+        self.data = [[response JSONValue] objectForKey:@"weatherinfo"];
+
+        UIImage *img = [ResourceLoader loadImage:@"WeatherIcons/28.png"] ;
+        iconView.image = img;
+    }
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
     [tableView reloadData];
 }
 
-- (void) loadData {
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    [HUD removeFromSuperview];
+    [HUD release];
+}
+
+- (void) loadDataAsynchronous {
     NSString *urlStr = [[[NSString alloc] initWithFormat:@"http://m.weather.com.cn/data/%@.html", city] autorelease];
     NSURL *url = [NSURL URLWithString:urlStr];
-//        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-//        [request startSynchronous];
-//        NSError *error = [request error];
-//        if (!error) {
-//            NSString *response = [request responseString];
-//            NSLog(@"result is : %@", response);
-//            data = [response JSONValue];
-//        }
-    
-//    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-//    [request setDelegate:self];
-//    [request startAsynchronous];
-//    
-//    
-//    [HUD hide:YES];
-    //NSString *str = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-    //NSDictionary *data = [str JSONValue];
-    //[url release];
-    //[str release];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
 	[request setShowAccurateProgress:NO];
-	//[request setDownloadProgressDelegate:progressIndicator];
-    //[request setUrlReplacementMode:([dataURICheckbox state] == NSOnState ? ASIReplaceExternalResourcesWithData : ASIReplaceExternalResourcesWithLocalURLs)];
-    //    
-	// It is strongly recommended that you set both a downloadCache and a downloadDestinationPath for all ASIWebPageRequests
     [request setDownloadCache:[ASIDownloadCache sharedCache]];
     [request setDownloadDestinationPath:[[ASIDownloadCache sharedCache] pathToStoreCachedResponseDataForRequest:request]];
-    //    
     [[ASIDownloadCache sharedCache] setShouldRespectCacheControlHeaders:NO];
 	[request startAsynchronous];
 }
@@ -157,6 +139,7 @@
     [HUD hide:YES];
     [tableView reloadData];
 }
+
 - (void)requestFailed:(ASIHTTPRequest *)request {
     HUD.delegate = self;
     HUD.labelText = @"Load data failed";
@@ -165,34 +148,13 @@
     [HUD hide:YES];
 }
 
-
-- (void) loadDataFailed: (ASIHTTPRequest *)request {
-}
-
-- (void) didFinishLoadData: (ASIHTTPRequest *)request {
-}
-
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-    //[self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:self.tableView waitUntilDone:YES];
-    //NSLog(@"Rows :%@", [tableView.delegate class] );
-    //NSLog(@"Rows :%@", self.data);
-//    tableView.delegate = self;
-//    tableView.dataSource = self;
-//    NSLog(@"Rows :%d", tableView.delegate == self );
-    [HUD removeFromSuperview];
-    [HUD release];
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -202,10 +164,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-	static NSString *cellIdentifer = @"weatherCell";
+    // 这里如果不重新引用，则会导致tableView再次reload时候失效，加在这里有两个问题，1：这样重新引用可能本身就是错误的做法；2：即使需要重新引用，加在这里的实际可能也不对
+    self.tableView = _tableView;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView.backgroundColor = [UIColor clearColor];
 
-	WeatherCellView *cell = (WeatherCellView *)[_tableView dequeueReusableCellWithIdentifier:cellIdentifer];
+    
+ 	static NSString *cellIdentifer = @"weatherCell";
+    WeatherCellView *cell = (WeatherCellView *)[_tableView dequeueReusableCellWithIdentifier:cellIdentifer];
 	if (cell == nil) {
         NSInteger index = 0;
         switch ([indexPath row]) {
@@ -225,6 +191,19 @@
 		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"WeatherCellView" owner:self options:nil];
         cell = (WeatherCellView *)[nib objectAtIndex:index];
 	}
+    StyledBackgroundView *bgView = [[StyledBackgroundView alloc] initWithFrame:CGRectZero];
+    bgView.borderColor = [UIColor lightGrayColor];
+    bgView.fillColor = [UIColor blackColor];
+    bgView.alpha = 0.6;
+    if (indexPath.row == 0) {
+        bgView.position = CellBackgroundViewPositionTop;
+    } else if (indexPath.row == 4) {
+        bgView.position = CellBackgroundViewPositionBottom;
+    } else {
+        bgView.position = CellBackgroundViewPositionMiddle;
+    }
+    cell.backgroundView = bgView;
+
     
     //*city, *topWeather, *cellWeather, *date, *topTemp, *cellTemp, *topWind, *cellWind, *windDirction, *powerBy;
 	cell.city.text         = [data objectForKey:@"city"];
@@ -236,6 +215,7 @@
 	cell.topWind.text      = [data objectForKey:@"fl1"];
 	cell.cellWind.text     = [data objectForKey:[[NSString alloc] initWithFormat:@"fl%d", indexPath.row]];
 	cell.windDirction.text = [data objectForKey:@"wind1"];
+    cell.cellImage.image   = [ResourceLoader loadImage:@"WeatherIcons/11_small.png"];
 	cell.powerBy.text      = @"www.weather.com.cn";
 	//cell..text = @"this";
     
@@ -247,15 +227,15 @@
     NSInteger height = 1;
     switch ([indexPath row]) {
         case 0 :
-            height = 120;
+            height = 100;
             break;
         case 1 :
         case 2 :
         case 3 :
-            height = 90;
+            height = 65;
             break;
         case 4 :
-            height = 40;
+            height = 15;
         default:
             break;
     }

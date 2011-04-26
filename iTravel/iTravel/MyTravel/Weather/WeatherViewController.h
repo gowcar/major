@@ -15,7 +15,10 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) NSArray *viewControllers;
+@property (nonatomic, readonly) NSInteger currentPageNumber;
 
 -(IBAction) testJSON: (id)sender;
+- (void) reload: (id)sender;
 
 @end
