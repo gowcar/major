@@ -1,0 +1,44 @@
+#windContainer {
+    position: absolute;
+    top: 0px;
+    width: 320px;
+    height: 480px;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 1.0; 
+}
+#windContainer > div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    -webkit-animation-iteration-count: infinite, infinite;
+    -webkit-animation-direction: normal, horizontal ;
+    -webkit-animation-timing-function: linear, ease-in;
+}
+#windContainer > div > img {
+     position: absolute;
+     width: 50px;
+     height: 50px;
+     -webkit-animation-iteration-count: infinite;
+     -webkit-animation-direction: alternate;
+     -webkit-animation-timing-function: ease-in-out;
+     -webkit-transform-origin: 50% -100%;
+}
+@-webkit-keyframes fade {
+    0%	 { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { opacity: 1; }
+}
+@-webkit-keyframes float {
+    0%	 { -webkit-transform: translate(-220px, 0px); }
+    100% { -webkit-transform: translate(640px, 40px); }
+}
+@-webkit-keyframes clockwiseSpin {
+    0%	 { -webkit-transform: rotateX(-360deg); }
+    100% { -webkit-transform: rotateX(360deg); }
+}
+@-webkit-keyframes counterclockwiseSpinAndFlip {
+    0%	 { -webkit-transform: scale(-1, 1) rotate(360deg); }
+    100% { -webkit-transform: scale(-1, 1) rotate(-360deg); }
+}
+

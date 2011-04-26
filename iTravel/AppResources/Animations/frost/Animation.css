@@ -1,0 +1,25 @@
+
+body {
+	margin: 0;
+}
+
+@-webkit-keyframes frost_animation {
+	0% {opacity: 0.0;}
+	50% {opacity: 1.0;}
+	100% {opacity: 0.0;}
+}
+
+#frost {
+	position: absolute;
+	left: 0px;
+    top: 0px;
+	width: 320px;
+	height: 480px;
+	background-color: transparent;
+	opacity: 0.0;
+	-webkit-animation-name: frost_animation;
+    -webkit-animation-duration: 20s;
+	-webkit-animation-iteration-count: infinite;	    
+    -webkit-animation-delay: 5s;
+
+}

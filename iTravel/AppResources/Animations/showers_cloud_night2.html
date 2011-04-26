@@ -1,0 +1,57 @@
+<html>
+
+<head>
+
+
+
+<link rel="stylesheet" href="moon/Animation.css">	    
+<script language="JavaScript" src="moon.js"></script> 
+
+<script type="text/JavaScript">
+
+function refresh()
+{
+var now = new Date();
+var h = now.getHours();
+var m = now.getMinutes();
+var s = now.getSeconds();
+var time = m  + s; 
+
+		if(time == 0) {
+			location.reload();
+		}
+}
+ 
+
+</script>
+
+</head>
+
+<body onload="setInterval('refresh()', 1000);">
+
+<div id="moon">
+
+ <img onload="image()" id="changeimage" src="moon/moon0.png" />
+
+</div>
+
+		<title>showers_cloud_night</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<link href="showers_cloud_night/Private/includes/showers_cloud_night.css" rel="stylesheet" type="text/css" media="screen" charset="utf-8" />
+		<script src="showers_cloud_night/Private/includes/showers_cloud_night.js" type="text/javascript" charset="utf-8"></script>
+		<body margin="0" topmargin="0" leftmargin="0" scroll="no">
+		<div id="CloudContainer"></div>
+
+
+		<title>rain_night</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<link href="rain_night/Private/includes/rain_night.css" rel="stylesheet" type="text/css" media="screen" charset="utf-8" />
+		<script src="rain_night/Private/includes/rain_night.js" type="text/javascript" charset="utf-8"></script>
+		<body margin="0" topmargin="0" leftmargin="0" scroll="no">
+		<div id="dropContainer"></div>
+	
+	</head>
+	</body>
+	</html>

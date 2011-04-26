@@ -1,0 +1,49 @@
+
+<html>
+<head>
+
+<link rel="stylesheet" href="moon/Animation.css">	    
+<script language="JavaScript" src="moon.js"></script> 
+
+<script type="text/JavaScript">
+
+function refresh()
+{
+var now = new Date();
+var h = now.getHours();
+var m = now.getMinutes();
+var s = now.getSeconds();
+var time = m  + s; 
+
+		if(time == 0) {
+			location.reload();
+		}
+}
+ 
+
+</script>
+
+</head>
+
+<body onload="setInterval('refresh()', 1000);">
+
+<div id="moon">
+
+ <img onload="image()" id="changeimage" src="moon/moon0.png" />
+
+</div>
+
+</html>
+		<title>Haze_night</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<link href="Haze_night/Private/includes/fog.css" rel="stylesheet" type="text/css" media="screen" charset="utf-8" />
+		<script src="Haze_night/Private/includes/fog.js" type="text/javascript" charset="utf-8"></script>
+		<body margin="0" topmargin="0" leftmargin="0" scroll="no">
+		<div id="fogContainer"></div>
+	
+	
+	</body>
+	</head>
+	</html>
+

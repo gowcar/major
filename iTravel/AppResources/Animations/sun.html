@@ -1,0 +1,41 @@
+<html>
+
+<head>
+
+
+
+<link rel="stylesheet" href="sun/Animation.css">	    
+<script language="JavaScript" src="sun.js"></script> 
+
+<script type="text/JavaScript">
+
+function refresh()
+{
+var now = new Date();
+var h = now.getHours();
+var m = now.getMinutes();
+var s = now.getSeconds();
+var time = m  + s; 
+
+		if(time == 0) {
+			location.reload();
+		}
+}
+ 
+
+</script>
+
+</head>
+
+<body onload="setInterval('refresh()', 1000);">
+
+<div id="sunray">
+
+ <img onload="image()" id="changeimage" src="sun/Sunray0.png" />
+
+</div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,62 @@
+#dropContainer {
+    background-color: transparent;
+    background:url(snow.png);
+    position: absolute;
+    top: 0px;
+    width: 320px;
+    height: 480px;
+    z-index: 0;
+    overflow: hidden;
+}
+#dropContainer > div {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    -webkit-animation-iteration-count: infinite, infinite;
+    -webkit-animation-direction: normal, normal;
+    -webkit-animation-timing-function: linear, ease-in;
+}
+#dropContainer > div > img {
+     position: absolute;
+     width: 20px;
+     height: 20px;
+     -webkit-animation-iteration-count: infinite;
+     -webkit-animation-direction: alternate;
+     -webkit-animation-timing-function: ease-in-out;
+     -webkit-transform-origin: 50% -100%;
+}
+@-webkit-keyframes drop {
+    0%	 { -webkit-transform: translate(0px, -50px); }
+    100% { -webkit-transform: translate(0px, 600px); }
+}
+
+@-webkit-keyframes wiper {
+	0% {
+		-webkit-transform:rotate(-90deg);
+	}
+	70% {
+		-webkit-transform:rotate(-90deg);
+	}
+	75% {
+		-webkit-transform:rotate(90deg);
+	}
+	80% {
+		-webkit-transform:rotate(-90deg);
+	}
+	100% {
+		-webkit-transform:rotate(-90deg);
+	}
+}
+
+#Wiper {
+	-webkit-transform:rotate(-90deg);
+	position:absolute;
+	top:-10px;
+	left:150px;
+	z-index:1;
+	-webkit-transform-origin-x: 10;
+	-webkit-transform-origin-y: 0;
+	-webkit-animation-name: wiper;
+	-webkit-animation-duration: 15s;
+	-webkit-animation-iteration-count: infinite;
+}

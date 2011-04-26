@@ -1,0 +1,25 @@
+<html>
+<head>
+<script language="JavaScript">
+
+function redirect(dayURL, nightURL)
+{
+var now;
+var h;
+
+now = new Date();
+h = now.getHours();
+
+if ((h < 6) || (h > 17)) {
+window.location = nightURL;
+} else {
+window.location = dayURL;
+}
+}
+
+</script>
+</head>
+<body onLoad="redirect('showers_cloud2.html','showers_cloud_night2.html' )">
+
+</body>
+</html>

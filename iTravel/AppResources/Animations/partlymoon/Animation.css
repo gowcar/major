@@ -1,0 +1,26 @@
+
+body {
+	margin: 0;
+}
+
+@-webkit-keyframes sunray_animation {
+	0% {opacity: 0.3;}
+	50% {opacity: 1.0;}
+	100% {opacity: 0.3;}
+}
+
+#sunray {
+	position: absolute;
+	left: -15px;
+    top: -15px;
+	width: 320px;
+	height: 480px;
+	background-color: transparent;
+	opacity: 0.0;
+	-webkit-animation-name: sunray_animation;
+    -webkit-animation-duration: 15s;
+	-webkit-animation-iteration-count: infinite;	    
+    -webkit-animation-delay: 5s;
+
+}
+

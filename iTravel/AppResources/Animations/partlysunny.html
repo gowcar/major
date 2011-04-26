@@ -1,0 +1,42 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="sun/Animation.css">	    
+<script language="JavaScript" src="sun.js"></script> 
+
+<script type="text/JavaScript">
+
+function refresh()
+{
+var now = new Date();
+var h = now.getHours();
+var m = now.getMinutes();
+var s = now.getSeconds();
+var time = m  + s; 
+
+		if(time == 0) {
+			location.reload();
+		}
+}
+</script>
+
+<body onload="setInterval('refresh()', 1000);">
+
+<div id="sunray">
+
+<img onload="image()" id="changeimage" src="sun/Sunray0.png" />
+
+</div>
+
+
+		<title>cloud</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<link href="partlycloud/Private/includes/cloud.css" rel="stylesheet" type="text/css" media="screen" charset="utf-8" />
+		<script src="partlycloud/Private/includes/cloud.js" type="text/javascript" charset="utf-8"></script>
+    	<body margin="0" topmargin="0" leftmargin="0" scroll="no">
+		<div id="CloudContainer"></div>
+
+</body>
+</head>
+</html>
