@@ -16,7 +16,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Weather测试
+        // 很好很好
     }
     return self;
 }
