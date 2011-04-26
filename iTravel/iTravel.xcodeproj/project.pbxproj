@@ -91,7 +91,7 @@
 		3F310658135AB29000DCFF14 /* iTravel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iTravel-Prefix.pch"; sourceTree = "<group>"; };
 		3F310659135AB29000DCFF14 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3F31065B135AB29000DCFF14 /* iTravelAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTravelAppDelegate.h; sourceTree = "<group>"; };
-		3F31065C135AB29000DCFF14 /* iTravelAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iTravelAppDelegate.m; sourceTree = "<group>"; };
+		3F31065C135AB29000DCFF14 /* iTravelAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTravelAppDelegate.m; sourceTree = "<group>"; };
 		3F310672135AB29100DCFF14 /* iTravelTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTravelTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F31067A135AB29100DCFF14 /* iTravelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iTravelTests-Info.plist"; sourceTree = "<group>"; };
 		3F31067E135AB29100DCFF14 /* iTravelTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iTravelTests-Prefix.pch"; sourceTree = "<group>"; };
