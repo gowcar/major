@@ -21,7 +21,9 @@
     NSString *city;
     NSDictionary *data;
     MBProgressHUD *HUD;
+    UIWebView *webView;
     UIImageView *iconView;
+    NSMutableDictionary *legend;
 }
 
 - (WeatherPageViewController *) initWithCity: (NSString *)_city;
@@ -31,6 +33,8 @@
 @property (nonatomic,retain) NSString *city;
 @property (nonatomic,retain) NSDictionary *data;
 @property (nonatomic,retain) UIImageView *iconView;
+@property (nonatomic,retain) UIWebView *webView;
 @property(nonatomic) BOOL needRefresh;
+@property (nonatomic,retain) NSDictionary *legend;
 
 @end

@@ -37,7 +37,7 @@
 {
 //    scrollView.layer.cornerRadius = 8;
 //    scrollView.layer.masksToBounds = YES;
-
+    
     self.view.backgroundColor = [UIColor blackColor];
     scrollView.backgroundColor = [UIColor clearColor];
     

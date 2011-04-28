@@ -11,7 +11,7 @@
 
 @implementation WeatherPageViewController
 
-@synthesize tableView, iconView, city, data, needRefresh;
+@synthesize tableView, iconView, webView, city, data, needRefresh, legend;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +30,7 @@
 
 - (void)dealloc
 {
+    [legend release];
     [city release];
     [data release];
     [super dealloc];
@@ -44,6 +45,10 @@
 
 - (void)viewDidLoad
 {
+    NSMutableDictionary *appConfig = [ResourceLoader appConfig];
+    
+    self.legend = [[appConfig objectForKey:@"Weather"] objectForKey:@"legend"];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
@@ -52,14 +57,13 @@
     self.tableView.backgroundView.backgroundColor = [UIColor clearColor];
 
     CGRect webRect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    UIWebView *webView  = [[UIWebView alloc] initWithFrame: webRect];
+    self.webView  = [[UIWebView alloc] initWithFrame: webRect];
     
-    webView.userInteractionEnabled = NO;
-    webView.delegate = self;
-    webView.opaque = NO;
-    webView.backgroundColor = [UIColor blackColor];
-
-    [webView loadRequest:[NSURLRequest requestWithURL:[ResourceLoader resourceURLFromFile:@"Animations/rain.html"]]];
+    self.webView.userInteractionEnabled = NO;
+    self.webView.delegate = self;
+    self.webView.opaque = NO;
+    self.webView.backgroundColor = [UIColor blackColor];
+    
     [self.view insertSubview:webView atIndex:0];
     [self.view.window sendSubviewToBack:webView];
 
@@ -68,6 +72,10 @@
     [self.view addSubview:self.iconView];
 
     [super viewDidLoad];
+}
+
+- (void)setBackgroundAnimation: (NSString *)animation {
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[ResourceLoader resourceURLFromFile:[[NSString alloc] initWithFormat:@"Animations/%@", animation]]]];
 }
 
 - (void )webViewDidFinishLoad:(UIWebView *)webView {
@@ -102,9 +110,16 @@
     if (!error) {
         NSString *response = [request responseString];
         self.data = [[response JSONValue] objectForKey:@"weatherinfo"];
+        
+        NSMutableString *str = [NSMutableString stringWithString:[self.data objectForKey:@"weather1"]];
+        NSArray *weather = [str componentsSeparatedByString:@"转"];
+        NSDictionary *legendData = [self.legend objectForKey:[weather objectAtIndex:0]];
 
-        UIImage *img = [ResourceLoader loadImage:@"WeatherIcons/28.png"] ;
+        UIImage *img = [ResourceLoader loadImage:[[NSString alloc]initWithFormat:@"WeatherIcons/%@",[legendData objectForKey:@"icon"]]] ;
         iconView.image = img;
+        
+        NSString *animation = [legendData objectForKey:@"animation"];
+        [self setBackgroundAnimation:animation];
     }
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible: NO];
     [tableView reloadData];
@@ -215,7 +230,12 @@
 	cell.topWind.text      = [data objectForKey:@"fl1"];
 	cell.cellWind.text     = [data objectForKey:[[NSString alloc] initWithFormat:@"fl%d", indexPath.row]];
 	cell.windDirction.text = [data objectForKey:@"wind1"];
-    cell.cellImage.image   = [ResourceLoader loadImage:@"WeatherIcons/11_small.png"];
+    
+    NSString *str = cell.cellWeather.text;
+    NSArray *weather = [str componentsSeparatedByString:@"转"];
+    NSDictionary *legendData = [self.legend objectForKey:[weather objectAtIndex:0]];
+
+    cell.cellImage.image   = [ResourceLoader loadImage:[[NSString alloc] initWithFormat:@"WeatherIcons/%@", [legendData objectForKey:@"smallIcon"]]];
 	cell.powerBy.text      = @"www.weather.com.cn";
 	//cell..text = @"this";
     

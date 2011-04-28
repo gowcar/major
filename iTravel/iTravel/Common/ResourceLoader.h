@@ -10,10 +10,10 @@
 
 
 @interface ResourceLoader : NSObject {
-    
 }
 
 + (NSURL *) resourceURLFromFile: (NSString *) _filepath;
 + (UIImage *) loadImage: (NSString *) _path;
++ (NSMutableDictionary *) appConfig;
 
 @end
