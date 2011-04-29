@@ -219,10 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				85A4AB27135F5A640038AB4E /* MBProgressHUD */,
-				85A4AB18135F4F750038AB4E /* libz.dylib */,
-				85A4AB16135F4F680038AB4E /* MobileCoreServices.framework */,
-				85A4AB14135F4F580038AB4E /* CFNetwork.framework */,
-				85A4AB12135F4F4D0038AB4E /* SystemConfiguration.framework */,
 				85A4AB10135F4F070038AB4E /* AppResources */,
 				85A4AAF3135F4EF20038AB4E /* ASIHttpRequest */,
 				85A4AA97135F49CD0038AB4E /* JSON */,
@@ -245,6 +241,10 @@
 		3F31064B135AB29000DCFF14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				85A4AB18135F4F750038AB4E /* libz.dylib */,
+				85A4AB16135F4F680038AB4E /* MobileCoreServices.framework */,
+				85A4AB14135F4F580038AB4E /* CFNetwork.framework */,
+				85A4AB12135F4F4D0038AB4E /* SystemConfiguration.framework */,
 				3F31064C135AB29000DCFF14 /* UIKit.framework */,
 				3F31064E135AB29000DCFF14 /* Foundation.framework */,
 				3F310650135AB29000DCFF14 /* CoreGraphics.framework */,
