@@ -45,7 +45,6 @@
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{320, 460}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -68,7 +67,6 @@
 					<object class="IBUITabBarItem" key="IBUITabBarItem" id="546974022">
 						<string key="IBUITitle">概览</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUITabBar" ref="244482978"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="752628311"/>
 					<string key="IBUINibName">MyTravelOverviewView</string>
@@ -86,7 +84,6 @@
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="22027829">
 							<string key="IBUITitle">天气</string>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<reference key="IBUITabBar" ref="244482978"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="752628311"/>
 						<string key="IBUINibName">WeatherView</string>
@@ -101,7 +98,6 @@
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="1057100241">
 							<string key="IBUITitle">机票</string>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<reference key="IBUITabBar" ref="244482978"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="752628311"/>
 						<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
@@ -117,7 +113,6 @@
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="1043027075">
 							<string key="IBUITitle">酒店</string>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<reference key="IBUITabBar" ref="244482978"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="752628311"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -132,7 +127,6 @@
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="359308672">
 							<string key="IBUITitle">备忘</string>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<reference key="IBUITabBar" ref="244482978"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="752628311"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -149,21 +143,11 @@
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					<object class="NSMutableArray" key="IBUIItems">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<reference ref="546974022"/>
-						<reference ref="22027829"/>
-						<reference ref="1057100241"/>
-						<reference ref="1043027075"/>
-						<reference ref="359308672"/>
-					</object>
-					<reference key="IBUISelectedItem" ref="546974022"/>
 				</object>
 			</object>
 		</object>
@@ -359,68 +343,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">88</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">MyTravelDetailViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">tabBarController</string>
-						<string key="NS.object.0">UITabBarController</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">tabBarController</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">tabBarController</string>
-							<string key="candidateClassName">UITabBarController</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MyTravelDetailViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MyTravelOverviewViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MyTravelOverviewViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">WeatherViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">testJSON:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">testJSON:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">testJSON:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">scrollView</string>
-						<string key="NS.object.0">UIScrollView</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">scrollView</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">scrollView</string>
-							<string key="candidateClassName">UIScrollView</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/WeatherViewController.h</string>
-					</object>
-				</object>
-			</object>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
