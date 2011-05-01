@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F074951136C5166005CABA5 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F074950136C5166005CABA5 /* CoreText.framework */; };
+		3F074959136C5FAE005CABA5 /* MyTravelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F074958136C5FAE005CABA5 /* MyTravelCellView.xib */; };
+		3F07495C136C5FC3005CABA5 /* MyTravelCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F07495B136C5FC2005CABA5 /* MyTravelCellView.m */; };
 		3F31064D135AB29000DCFF14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F31064C135AB29000DCFF14 /* UIKit.framework */; };
 		3F31064F135AB29000DCFF14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F31064E135AB29000DCFF14 /* Foundation.framework */; };
 		3F310651135AB29000DCFF14 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F310650135AB29000DCFF14 /* CoreGraphics.framework */; };
@@ -85,6 +88,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F074950136C5166005CABA5 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3F074958136C5FAE005CABA5 /* MyTravelCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTravelCellView.xib; sourceTree = "<group>"; };
+		3F07495A136C5FC1005CABA5 /* MyTravelCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTravelCellView.h; sourceTree = "<group>"; };
+		3F07495B136C5FC2005CABA5 /* MyTravelCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTravelCellView.m; sourceTree = "<group>"; };
 		3F310648135AB29000DCFF14 /* iTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F31064C135AB29000DCFF14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3F31064E135AB29000DCFF14 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -199,6 +206,7 @@
 				3F31064D135AB29000DCFF14 /* UIKit.framework in Frameworks */,
 				3F31064F135AB29000DCFF14 /* Foundation.framework in Frameworks */,
 				3F310651135AB29000DCFF14 /* CoreGraphics.framework in Frameworks */,
+				3F074951136C5166005CABA5 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				85A4AB18135F4F750038AB4E /* libz.dylib */,
+				3F074950136C5166005CABA5 /* CoreText.framework */,
 				85A4AB16135F4F680038AB4E /* MobileCoreServices.framework */,
 				85A4AB14135F4F580038AB4E /* CFNetwork.framework */,
 				85A4AB12135F4F4D0038AB4E /* SystemConfiguration.framework */,
@@ -373,6 +382,9 @@
 		85A4AACA135F4CA80038AB4E /* MyTravel */ = {
 			isa = PBXGroup;
 			children = (
+				3F074958136C5FAE005CABA5 /* MyTravelCellView.xib */,
+				3F07495A136C5FC1005CABA5 /* MyTravelCellView.h */,
+				3F07495B136C5FC2005CABA5 /* MyTravelCellView.m */,
 				85A4AACB135F4CA80038AB4E /* MyTravelDetailView.xib */,
 				85A4AACC135F4CA80038AB4E /* MyTravelDetailViewController.h */,
 				85A4AACD135F4CA80038AB4E /* MyTravelDetailViewController.m */,
@@ -541,6 +553,7 @@
 				85A4AAE9135F4CA80038AB4E /* WeatherView.xib in Resources */,
 				85A4AB11135F4F070038AB4E /* AppResources in Resources */,
 				85395C581369BDBF0067D6AC /* AppConfig.plist in Resources */,
+				3F074959136C5FAE005CABA5 /* MyTravelCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +635,7 @@
 				85A4AB2A135F5A640038AB4E /* MBProgressHUD.m in Sources */,
 				85A4AB2D135F5B900038AB4E /* ResourceLoader.m in Sources */,
 				85506657136746E5004249B3 /* StyledBackgroundView.m in Sources */,
+				3F07495C136C5FC3005CABA5 /* MyTravelCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

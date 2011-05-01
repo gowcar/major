@@ -9,6 +9,10 @@
 #import "MyTravelViewController.h"
 #import "iTravelAppDelegate.h"
 #import "MyTravelDetailViewController.h"
+#import "StyledBackgroundView.h"
+#import "MyTravelCellView.h"
+#import "ResourceLoader.h"
+
 
 
 @implementation MyTravelViewController
@@ -18,10 +22,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
+
 
 - (void)dealloc
 {
@@ -66,15 +71,32 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"MyTravelCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MyTravelCellView *cell = (MyTravelCellView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[MyTravelCellView alloc] initWithNibName:@"MyTravelCellView" bundle:[NSBundle mainBundle]] autorelease];
     }
+    StyledBackgroundView *bgView = [[[StyledBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
+    bgView.borderColor = [UIColor lightGrayColor];
+    bgView.fillColor = [UIColor blackColor];
+    bgView.alpha = 0.6;
     
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    NSString *rowIndex = [[NSString alloc] initWithFormat:@"%d", indexPath.row];
-    [rowIndex release];
-    cell.textLabel.text = @"2011年4月17号 深圳-北京"; 
+    if (indexPath.row == 0) {
+        bgView.position = CellBackgroundViewPositionTop;
+    } else if (indexPath.row == 6) {
+        bgView.position = CellBackgroundViewPositionBottom;
+    } else {
+        bgView.position = CellBackgroundViewPositionMiddle;
+    }
+    cell.backgroundView = bgView;
+    //cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    //cell.textLabel.backgroundColor = [UIColor clearColor];
+    //cell.textLabel.textColor = [UIColor whiteColor];
+    //cell.textLabel.font = self.byxs7000Font;
+    //cell.textLabel.text = [@"2011年4月17号 深圳-北京" autorelease]; 
+    cell.lblDate.text = @"2011年4月17号";
+    cell.lblFromPlace.text = @"深圳";
+    cell.lblToPlace.text = @"北京";
+    cell.imgArrow.image = [ResourceLoader loadImage:@"arrow.png"]; 
     
     // Configure the cell.
     return cell;
@@ -96,6 +118,9 @@
     [appDelegate.window addSubview:[appDelegate.myTravelDetailViewController view]];
 
     [UIView commitAnimations];
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 55.0;
 }
 
 @end

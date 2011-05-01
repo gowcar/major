@@ -7,6 +7,7 @@
 //
 
 #import "ResourceLoader.h"
+#import <CoreText/CTFontManager.h>
 
 
 @implementation ResourceLoader
@@ -35,4 +36,9 @@ static NSMutableDictionary *_appConfig;
     return _appConfig;
 }
 
++ (UIFont *) loadFontFromFile: (NSString *) _filepath withFontFamilyName: (NSString *) _fontName withFontSize: (float)_size{
+    CFURLRef fontURL = (CFURLRef)[ResourceLoader resourceURLFromFile:_filepath];
+    CTFontManagerRegisterFontsForURL(fontURL, kCTFontManagerScopeProcess, nil);
+    return [UIFont fontWithName:_fontName size:_size];
+}
 @end

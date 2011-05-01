@@ -15,5 +15,6 @@
 + (NSURL *) resourceURLFromFile: (NSString *) _filepath;
 + (UIImage *) loadImage: (NSString *) _path;
 + (NSMutableDictionary *) appConfig;
++ (UIFont *) loadFontFromFile: (NSString *) _filepath withFontFamilyName: (NSString *) _name withFontSize: (float)_size;
 
 @end
