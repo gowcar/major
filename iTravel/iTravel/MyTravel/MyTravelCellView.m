@@ -45,7 +45,6 @@
         [self styledLabel:self.lblFromPlace WithFont:byxs7000Font];
         [self styledLabel:self.lblTo WithFont:byxs7000Font];
         [self styledLabel:self.lblToPlace WithFont:byxs7000Font];
-        [self sizeToFit];
     }
     return self;
 }
